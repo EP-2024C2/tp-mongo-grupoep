@@ -1,5 +1,5 @@
-const componenteSchema = require('./componenteSchema')
+const componente = require('./componente.schema')
 const fabricanteSchemateSchema = require('./fabricanteSchema')
 const productoSchema=require('./productoSchema')
 
-module.exports={componenteSchema,fabricanteSchemateSchema,productoSchema}
+module.exports = {componente}
