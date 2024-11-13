@@ -1,9 +1,9 @@
-const {componente} = require('../mongoSchemas')
+const {Componente} = require('../mongoSchemas')
 
 const controller ={}
 
 controller.getAllComponentes = async (_,res) => {
-    const componentes = await componente.findAll({})
+    const componentes = await Componente.find({})
     res.status(200).json(componentes)
 }
 
