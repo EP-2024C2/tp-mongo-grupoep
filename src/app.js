@@ -5,7 +5,7 @@ const routes = require('./routes')
 const app = express()
 
 app.use(express.json())
-
+//hola soy un comentario 
 app.use(routes)
 
 
