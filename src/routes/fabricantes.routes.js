@@ -8,6 +8,7 @@ routes.get('/fabricantes/:id',fabricantesController.getFabricanteById)
 //routes.get('/componentes/:id/productos',componentesController.getProductosByComponente)
 
 routes.post('/fabricantes',fabricantesController.createFabricante)
+routes.post('/fabricantes/:id/productos',fabricantesController.addProductoToFabricante)
 
 routes.put('/fabricantes/:id',fabricantesController.updateFabricante)
 

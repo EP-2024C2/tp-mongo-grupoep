@@ -15,6 +15,12 @@ controller.getProductoById = async (req, res) => {
     res.status(200).json(producto);
 }
 
+controller.getFabricantesByProductId = async(req,res)=>{
+  const _id = req.params.id;
+  const producto = await Producto.findById(_id).populate("fabricanteId");
+  res.status(200).json(producto);
+}
+
 controller.createProducto = async (req, res) => {
   const producto = await Producto.create(req.body);
   res.status(201).json(producto);
@@ -30,12 +36,13 @@ controller.addComponenteToProducto = async(req,res)=>{
   res.status(201).json(producto)
 }
 
-controller.addFabricanteToProducto = async(req,res)=>{
+/*controller.addFabricanteToProducto = async(req,res)=>{
   const id = req.params.id;
   const nuevoFabricante = {...req.body,productoId: new mongoose.Types.ObjectId(id)}
   const fabricante = await Fabricante.create(nuevoFabricante)
   res.status(201).json(fabricante)
 }
+*/
 
 /*const id = req.params.id;
   const nuevoLibro = { ...req.body, autorId: new mongoose.Types.ObjectId(id) };

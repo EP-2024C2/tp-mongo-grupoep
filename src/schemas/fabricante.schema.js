@@ -6,7 +6,7 @@ const fabricanteSchema = new mongoose.Schema({
     direccion : {type : Schema.Types.String, required:true},
     numeroContacto : {type : Schema.Types.Number, required:true},
     pathImgPerfil : {type : Schema.Types.String},
-    productoId: {type: Schema.Types.ObjectId,ref: "Producto",required: true}
+    productoId: {type: Schema.Types.ObjectId,ref: "Producto"}
 })
 
 const Fabricante = mongoose.model('Fabricante',fabricanteSchema);

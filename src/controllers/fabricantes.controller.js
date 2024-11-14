@@ -1,4 +1,5 @@
-const {Fabricante} = require('../schemas')
+const {Fabricante, Producto} = require('../schemas')
+const mongoose = require('../db/mongodb').mongoose;
 
 const controller ={}
 
@@ -16,6 +17,16 @@ controller.getFabricanteById = async (req, res) => {
 controller.createFabricante = async (req, res) => {
     const fabricante = await Fabricante.create(req.body);
     res.status(201).json(fabricante);
+}
+
+controller.addProductoToFabricante = async(req,res)=>{
+  const id = req.params.id
+  console.log(id)
+  const nuevoProducto = { ...req.body,fabricanteId: new mongoose.Types.ObjectId(id)}
+  console.log(nuevoProducto)
+  const producto = await Producto.create(nuevoProducto)
+  console.log(nuevoProducto)
+  res.status(201).json(producto)
 }
 
 controller.updateFabricante = async (req, res) => {
