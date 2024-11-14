@@ -1,4 +1,4 @@
-const { Componente,Producto,Fabricante } = require('../mongoSchemas')
+const { Componente,Producto,Fabricante } = require('../schemas')
 
 
 async function seedDatabase() {

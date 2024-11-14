@@ -1,4 +1,4 @@
-const {Componente} = require('../mongoSchemas')
+const {Componente} = require('../schemas')
 
 const controller ={}
 

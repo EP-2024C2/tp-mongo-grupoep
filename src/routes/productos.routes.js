@@ -5,9 +5,10 @@ const routes = Router()
 
 routes.get('/productos',productosController.getAllProductos)
 routes.get('/productos/:id',productosController.getProductoById)
-//routes.get('/componentes/:id/productos',componentesController.getProductosByComponente)
 
 routes.post('/productos',productosController.createProducto)
+routes.post('/productos/:id/componentes', productosController.addComponenteToProducto)
+routes.post('/productos/:id/fabricantes',productosController.addFabricanteToProducto)
 
 routes.put('/productos/:id',productosController.updateProducto)
 
