@@ -6,8 +6,17 @@ const fabricanteSchema = new mongoose.Schema({
     direccion : {type : Schema.Types.String, required:true},
     numeroContacto : {type : Schema.Types.Number, required:true},
     pathImgPerfil : {type : Schema.Types.String},
-    productoId: {type: Schema.Types.ObjectId,ref: "Producto"}
+    productos:[{type: Schema.Types.ObjectId,ref: 'Producto'}]
 })
+
+fabricanteSchema.set("toJSON", {
+    transform: (_, ret) => {
+        ret.id = ret._id.toString();
+        delete ret.__v;
+        delete ret._id;
+    },
+  });
+
 
 const Fabricante = mongoose.model('Fabricante',fabricanteSchema);
 

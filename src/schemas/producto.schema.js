@@ -8,8 +8,16 @@ const productoSchema = new mongoose.Schema({
     precio : {type : Schema.Types.Number, required:true},
     pathImg : {type : Schema.Types.String},
     componentes:[Componente.schema],
-    fabricanteId:{type: Schema.Types.ObjectId,ref: "Fabricante"}
+    fabricantes:[{type: Schema.Types.ObjectId,ref: 'Fabricante'}]
 })
+
+productoSchema.set("toJSON", {
+    transform: (_, ret) => {
+        ret.id = ret._id.toString();
+        delete ret.__v;
+        delete ret._id;
+    },
+});
 
 const Producto = mongoose.model('Producto',productoSchema);
 

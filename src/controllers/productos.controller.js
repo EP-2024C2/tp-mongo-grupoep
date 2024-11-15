@@ -1,6 +1,5 @@
-const {Producto,Componente,Fabricante} = require('../schemas')
+const {Producto,Fabricante} = require('../schemas')
 const mongoose = require('../db/mongodb').mongoose
-
 
 const controller ={}
 
@@ -16,9 +15,15 @@ controller.getProductoById = async (req, res) => {
 }
 
 controller.getFabricantesByProductId = async(req,res)=>{
-  const _id = req.params.id;
-  const producto = await Producto.findById(_id).populate("fabricanteId");
+  const id = req.params.id;
+  const producto = await Producto.findById(id).populate("fabricantes");
   res.status(200).json(producto);
+}
+
+controller.getComponentesByProductId = async(req,res) =>{
+  const id = req.params.id;
+  const producto = await Producto.findById(id)
+  res.status(200).json(producto)
 }
 
 controller.createProducto = async (req, res) => {
@@ -28,39 +33,34 @@ controller.createProducto = async (req, res) => {
 
 controller.addComponenteToProducto = async(req,res)=>{
   const id = req.params.id
-  const producto = await Producto.findById(id);
-  const componentes = producto.componentes
-  const componente = req.body
-  componentes.push(componente)
+  const producto = await Producto.findById(id)
+  producto.componentes.push(req.body)
   await producto.save()
   res.status(201).json(producto)
 }
 
-/*controller.addFabricanteToProducto = async(req,res)=>{
-  const id = req.params.id;
-  const nuevoFabricante = {...req.body,productoId: new mongoose.Types.ObjectId(id)}
-  const fabricante = await Fabricante.create(nuevoFabricante)
-  res.status(201).json(fabricante)
+controller.addFabricanteToProducto = async (req,res)=>{
+  const id = req.params.id
+  const producto = await Producto.findById(id);
+  const nuevoFabricante = { ...req.body, productos: [new mongoose.Types.ObjectId(id)] };
+  const fabricante = await Fabricante.create(nuevoFabricante);
+  producto.fabricantes.push(fabricante._id);
+  await producto.save();
+  res.status(201).json(producto);
 }
-*/
-
-/*const id = req.params.id;
-  const nuevoLibro = { ...req.body, autorId: new mongoose.Types.ObjectId(id) };
-  const libro = await Libro.create(nuevoLibro);
-  res.status(201).json(libro); */
 
 controller.updateProducto = async (req, res) => {
   const idDelProducto = req.params.id
-  const {nombre,descripcion,precio,pathImg} = req.body
-  const producto = await Producto.updateOne({_id:idDelProducto},{nombre,descripcion,precio,pathImg})
+  const {nombre,descripcion,precio,pathImg,componentes} = req.body
+  const producto = await Producto.updateOne({_id:idDelProducto},{nombre,descripcion,precio,pathImg,componentes})
   res.status(200).json(producto)
 }
 
 controller.deleteProducto = async (req, res) => {
+  //TODO: Borrar el producto de los fabricantes.
   const id = req.params.id
   const producto = await Producto.deleteOne({_id:id})
   res.status(200).json(producto)
 }
-
 
 module.exports = controller
