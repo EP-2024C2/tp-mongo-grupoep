@@ -1,7 +1,6 @@
 const mongoose = require('../db/mongodb').mongoose
-const middleware = {}
 
-middleware.validateId =(schema) => {
+const validateId =(schema) => {
     return async (req, res, next) => {
   const id = req.params.id
 
@@ -17,4 +16,4 @@ middleware.validateId =(schema) => {
   next()
 }}
 
-module.exports = middleware
+module.exports = validateId

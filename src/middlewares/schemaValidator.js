@@ -1,15 +1,12 @@
+
 const schemaValidator = (schema) => {
-  return (req, res, next) => {
-    const result = schema.validate(req.body, {abortEarly:false})
-    if(result.error){
-      return res.status(400).json({
-        errores: result.error.details.map( e => {
-          return {atributo:e.path[0], error:e.message}
-        })
-      })
+  return async (req, res, next) => {
+    try {
+      await schema.validate(req.body)      
+    } catch (error) {
+      return res.status(400).json({mensaje: error.message})
     }
     next()
   }
 }
-
 module.exports = schemaValidator

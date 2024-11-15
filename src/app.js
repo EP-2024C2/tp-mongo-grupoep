@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
   await dbConnect()
-  //createSemilla()
+  // createSemilla()
   console.log(`Escuchando en el puerto ${PORT}`)
 })
 
