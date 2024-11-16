@@ -1,8 +1,9 @@
 const {Router} = require('express')
-const {productosController} = require('../controllers')
+const {productosController, fabricantesController} = require('../controllers')
 const {Producto, Componente, Fabricante} = require ('../schemas')
 const validateId = require('../middlewares/validateId')
 const validateSchema = require('../middlewares/schemaValidator')
+const validateDelete = require('../middlewares/validateDelete')
 
 const routes = Router()
 
@@ -15,8 +16,8 @@ routes.post('/productos',validateSchema(Producto), productosController.createPro
 routes.post('/productos/:id/componentes',validateId(Producto), validateSchema(Componente), productosController.addComponenteToProducto)
 routes.post('/productos/:id/fabricantes',validateId(Producto), validateSchema(Fabricante), productosController.addFabricanteToProducto)
 
-routes.put('/productos/:id',validateId(Producto),validateSchema(Producto), productosController.updateProducto)
+routes.put('/productos/:id',validateId(Producto), productosController.updateProducto)
 
-routes.delete('/productos/:id',validateId(Producto), productosController.deleteProducto)
+routes.delete('/productos/:id',validateId(Producto),productosController.deleteProducto)
 
 module.exports = routes

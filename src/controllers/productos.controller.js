@@ -33,8 +33,9 @@ controller.createProducto = async (req, res) => {
 
 controller.addComponenteToProducto = async(req,res)=>{
   const id = req.params.id
+  componente = req.body
   const producto = await Producto.findById(id)
-  producto.componentes.push(req.body)
+  producto.componentes.push(componente);
   await producto.save()
   res.status(201).json(producto)
 }
@@ -57,7 +58,6 @@ controller.updateProducto = async (req, res) => {
 }
 
 controller.deleteProducto = async (req, res) => {
-  //TODO: Borrar el producto de los fabricantes.
   const id = req.params.id
   const producto = await Producto.deleteOne({_id:id})
   res.status(200).json(producto)

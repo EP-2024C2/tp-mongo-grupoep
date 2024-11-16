@@ -1,7 +1,7 @@
 const mongoose = require('../db/mongodb').mongoose
 
 const validateId =(schema) => {
-    return async (req, res, next) => {
+  return async (req, res, next) => {
   const id = req.params.id
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

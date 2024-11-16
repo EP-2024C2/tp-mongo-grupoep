@@ -1,8 +1,9 @@
 const {Router} = require('express')
 const {componentesController} = require('../controllers')
-const {Componente} = require ('../schemas')
+const {Componente,Producto} = require ('../schemas')
 const validateId = require('../middlewares/validateId')
 const validateSchema = require('../middlewares/schemaValidator')
+const validateDelete = require('../middlewares/validateDelete')
 
 const routes = Router()
 
