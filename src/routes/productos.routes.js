@@ -18,6 +18,6 @@ routes.post('/productos/:id/fabricantes',validateId(Producto), validateSchema(Fa
 
 routes.put('/productos/:id',validateId(Producto), productosController.updateProducto)
 
-routes.delete('/productos/:id',validateId(Producto),productosController.deleteProducto)
+routes.delete('/productos/:id',validateId(Producto),validateDelete(Fabricante,'productos'),productosController.deleteProducto)
 
 module.exports = routes

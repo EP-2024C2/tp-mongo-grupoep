@@ -3,6 +3,7 @@ const dbConnect = require('./db/mongodb').connectToDatabase
 const routes = require('./routes')
 const createSemilla = require('./seeders/semilla')
 const app = express()
+require('dotenv').config()
 
 app.use(express.json())
 
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
   await dbConnect()
-  //createSemilla()
+  createSemilla()
   console.log(`Escuchando en el puerto ${PORT}`)
 })
 

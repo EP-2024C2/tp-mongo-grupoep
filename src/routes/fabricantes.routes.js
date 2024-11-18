@@ -12,7 +12,6 @@ routes.get('/fabricantes/:id', validateId(Fabricante), fabricantesController.get
 routes.get('/fabricantes/:id/productos', validateId(Fabricante), fabricantesController.getProductosByFabricante)
 
 routes.post('/fabricantes',validateSchema(Fabricante), fabricantesController.createFabricante)
-routes.post('/fabricantes/:id/productos', validateId(Fabricante), validateSchema(Producto), fabricantesController.addProductoToFabricante)
 
 routes.put('/fabricantes/:id', validateId(Fabricante), validateSchema(Fabricante), fabricantesController.updateFabricante)
 

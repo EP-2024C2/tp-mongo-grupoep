@@ -25,16 +25,6 @@ controller.createFabricante = async (req, res) => {
     res.status(201).json(fabricante);
 }
 
-controller.addProductoToFabricante = async(req,res)=>{
-  const id = req.params.id
-  const fabricante = await Fabricante.findById(id);
-  const nuevoProducto = { ...req.body,fabricantes:[new mongoose.Types.ObjectId(id)]}
-  const producto = await Producto.create(nuevoProducto)
-  fabricante.productos.push(producto._id);
-  await fabricante.save();
-  res.status(201).json(fabricante);
-}
-
 controller.updateFabricante = async (req, res) => {
   const idDelFabricante = req.params.id
   const {nombre, direccion,numeroContacto,pathImgPerfil} = req.body
